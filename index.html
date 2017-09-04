@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Tao Long">
+	<title>Maverick test Sentiment</title>
+
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+	<!-- font-awesome for icons -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	
+	<script src="data/tweets.js"></script>
+	<script src="data/sentiments-nrc.js"></script>
+</head>
+<style>
+  .speech {border: 1px solid #DDD; width: 300px; padding: 0; margin: 0}
+  .speech input {border: 0; width: 240px; display: inline-block; height: 30px;}
+  .speech img {float: right; width: 40px }
+</style>
+
+<body>
+	<div class="container">
+		<!-- content -->
+		<h1><i class=""></i>Maverick test Sentiment</h1>
+		<br>
+		<br>
+		<br>
+
+		<div class="input-field">
+			<i class="fa fa-user fa-2x prefix" aria-hidden="true"></i>
+			<input name="query" placeholder="Enter product query" id="searchBox">
+			<img onclick="startDictation()" src="//i.imgur.com/cHidSVu.gif" />
+			<button id="searchButton" class="btn"><i class="fa fa-search" aria-label="search button"></i></button>
+			<input type="text" id="output" placeholder="Sentiment">
+		</div>
+			
+
+	</div>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.min.js"></script>
+	<script src="js/app.js"></script>
+	<script>
+  function startDictation() {
+
+    if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+      var recognition = new webkitSpeechRecognition();
+
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.lang = "en-US";
+      recognition.start();
+
+      recognition.onresult = function(e) {
+        document.getElementById('searchBox').value
+                                 = e.results[0][0].transcript;
+        recognition.stop();
+		document.getElementById("searchButton").click();
+        //document.getElementById('labnol').submit();
+      };
+
+      recognition.onerror = function(e) {
+        recognition.stop();
+      }
+
+    }
+  }
+</script>
+
+</body>
+
+</html>

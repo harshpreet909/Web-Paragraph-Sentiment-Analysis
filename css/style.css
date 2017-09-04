@@ -1,0 +1,11 @@
+/* styling goes here */
+
+#searchBox {
+  max-width: 30%; /* don't fill the page */
+}
+
+
+
+table {
+  width:auto; /* fit to contents */
+}
